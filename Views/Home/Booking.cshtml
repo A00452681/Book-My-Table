@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Booking Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <h3>Welcome to Book My Table</h3>
+    <br>
+    <h5>We are here to delight you with the delicious and yummy foods at any time of the day</h5>
+    <h5 align="left">Choose your Restaurant:</h5>
+    <br>
+</head>
+<body>
+    <form class="form-inline" asp-area="Identity" asp-page="/Account/Book" asp-route-returnUrl="@Url.Action("Booking", "Home", new { area = "" })">
+
+        <p>
+            <label for="location">
+                Enter the Current Location:
+                <input type="text" id="location" name="location">
+            </label>
+
+            <br>
+            <label for="cuisine">
+                Select Cuisine:
+                <input type="text" id="cuisine" name="cuisine">
+            </label>
+
+            <br>
+            <label for="location">
+                Choose your Restaurant:
+                <select id="meal" name="meal">
+                    <option value="Restaurant-A">Restaurant-A</option>
+                    <option value="Restaurant-B">Restaurant-B</option>
+                </select>
+            </label>
+            <br>
+            <label for="meal">
+                Choose your Meal:
+                <select name="meal" id="meal">
+                    <option value="volvo">Breakfast</option>
+                    <option value="saab">Lunch</option>
+                    <option value="mercedes">Dinner</option>
+                </select>
+            </label>
+            <br>
+            <input type="submit" value="Book" name="Book">
+        </p>
+
+
+    </form>
+</body>
+</html>
+

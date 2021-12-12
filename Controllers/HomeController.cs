@@ -23,6 +23,11 @@ namespace Book_My_Table.Controllers
             return View();
         }
 
+        public IActionResult Booking()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
