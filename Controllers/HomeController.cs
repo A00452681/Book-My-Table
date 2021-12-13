@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Book_My_Table.BusinessLogic;
+using System.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace Book_My_Table.Controllers
 {
@@ -25,6 +29,50 @@ namespace Book_My_Table.Controllers
 
         public IActionResult Booking()
         {
+            CustomerReg ctx = new CustomerReg();
+            List<Restaurant> restaurantlist = ctx.Restaurant.Where(res => res.Address.Contains("A-10, Spring Road")).ToList<Restaurant>();
+            ViewBag.Restaurant = new SelectList(restaurantlist, "RestaurantId", "RestaurantName");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult GetNames(string text)
+        {
+            List<Restaurant> restaurantlist = new List<Restaurant>();
+            CustomerReg ctx = new CustomerReg();
+            if (!string.IsNullOrEmpty(text))
+            {
+                restaurantlist = ctx.Restaurant.Where(res => res.Address.Contains(text)).ToList<Restaurant>();
+            }
+
+            List<object> listObj = new List<object>();
+            foreach (Restaurant rest in restaurantlist)
+            {
+                listObj.Add(new
+                {
+                    id = rest.RestaurantId,
+                    name = rest.RestaurantName
+                });
+            }
+            return Json(listObj, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+        [HttpPost]        
+        [ValidateAntiForgeryToken]
+        public IActionResult Book(Booking bookingModel)
+        {
+            if (ModelState.IsValid)
+            {
+                int recordsCreated = BookingDataProcessor.CreateBooking(bookingModel.BookingId,
+                    bookingModel.CustomerId,
+                    bookingModel.RestaurantId,
+                    bookingModel.BookingDate,
+                    bookingModel.BookingTime,
+                    bookingModel.MealId
+                    );
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 

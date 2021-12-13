@@ -10,7 +10,7 @@ namespace Book_My_Table.Models
         public int MealId { get; set; }
         public string Name { get; set; }
         public DateTime Timing { get; set; }
-        public ICollection<Restaurant> Restaurants { get; set; }
+        //public ICollection<Restaurant> Restaurants { get; set; }
         public virtual Booking Booking { get; set; }
 
     }

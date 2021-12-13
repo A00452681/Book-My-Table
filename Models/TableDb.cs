@@ -9,6 +9,6 @@ namespace Book_My_Table.Models
     {
         public int TableDbId { get; set; }
         public int RestaurantId { get; set; }
-        public ICollection<Restaurant> Restaurants { get; set; }
+   //     public ICollection<Restaurant> Restaurants { get; set; }
     }
 }

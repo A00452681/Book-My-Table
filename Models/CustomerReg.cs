@@ -12,7 +12,14 @@ namespace Book_My_Table.Models
         public CustomerReg()
         {
         }
-
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Restaurant>().HasNoKey();
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=dev.cs.smu.ca;Database=s_dheer;Trusted_Connection=False;MultipleActiveResultSets=true;User Id=s_dheer;Password=A00452681!cda");
+        }
         public CustomerReg(DbContextOptions<CustomerReg> options) : base(options)
         {
 
