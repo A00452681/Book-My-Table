@@ -30,7 +30,7 @@ namespace Book_My_Table.Controllers
         public IActionResult Booking()
         {
             CustomerReg ctx = new CustomerReg();
-            List<Restaurant> restaurantlist = ctx.Restaurant.Where(res => res.Address.Contains("A-10, Spring Road")).ToList<Restaurant>();
+            List<Restaurant> restaurantlist = ctx.Restaurant.ToList<Restaurant>();
             ViewBag.Restaurant = new SelectList(restaurantlist, "RestaurantId", "RestaurantName");
             return View();
         }
